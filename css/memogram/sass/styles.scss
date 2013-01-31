@@ -1,0 +1,100 @@
+@import "compass";
+@include global-reset;
+
+* { @include box-sizing(border-box); }
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+* :focus{outline: 0;}
+
+
+.tiles:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/* IE6 */
+* html .tiles, {
+  height: 1%;
+}
+/* IE7 */
+*:first-child + html .tiles {
+  min-height: 1%;
+}
+
+
+html, body {
+  background: lightgrey;
+}
+
+body {
+  font-family: 'Ubuntu', arial, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #262626;
+}
+
+
+h1 {
+  display: none;
+}
+
+form {
+  padding: 20px;
+  .form-item {
+    float: left;
+  }
+}
+.setup .tiles { display: none; }
+.game .tiles {
+  display: block;
+  background: black url('/resources/ow/ajax-loader.gif') no-repeat center center;
+  min-height: 200px;
+  border: 4px solid black;
+  clear: both;
+  
+  span {
+    display: inline-block;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    border: 4px solid darkgrey;
+    background: #AAA url('/resources/ow/question.png') no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
+    @include single-transition(all, 0.15s);
+  
+    &::before {
+      display:block;
+      content:'';
+      position:absolute;
+      width:100%;
+      height:100%;
+      z-index: 2;
+      @include box-shadow(#333 0 0 1px 1px inset, rgba(#000, 0.25) 0 0 4px 1px inset);
+    }
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 0;
+    }
+    
+    &:hover { 
+      //background-color: darkgrey; 
+      background-color: #777;
+      &::before {
+        //background: pink;
+      }
+    }
+    
+    //&.discovered img,
+    //&.clicked img { top:0; }
+    &.discovered img { top:0; }
+  }
+}
